@@ -3,11 +3,8 @@ import { getLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 
 //function addProductToCart(product) {
-  //setLocalStorage("so-cart", product);
+//setLocalStorage("so-cart", product);
 //}
-
-
-
 
 function addProductToCart(product) {
   // Get the existing cart items from local storage
