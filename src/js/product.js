@@ -1,9 +1,8 @@
 // import { setLocalStorage } from "./utils.mjs";
 // import { getLocalStorage } from "./utils.mjs";
 // import { findProductById } from "./productData.mjs";
-import { getParam } from './utils.mjs';
+import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
-
 
 // add to cart button event handler
 // async function addToCartHandler(e) {
@@ -12,6 +11,5 @@ import productDetails from "./productDetails.mjs";
 // }
 
 // Test getParam()
-const productId = getParam('product');
+const productId = getParam("product");
 productDetails(productId);
-
