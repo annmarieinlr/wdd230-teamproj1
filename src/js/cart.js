@@ -25,4 +25,23 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if there are items in the cart
+  let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cartItems.length > 0) {
+      // Show the cart-footer element
+      document.querySelector(".cart-footer").classList.remove("hide");
+
+      // Calculate the total cost
+      let total = 0;
+      cartItems.forEach(item => {
+          total += item.price * item.quantity;
+      });
+
+      // Display the total in the HTML element
+      document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
+  }
+});
+
 renderCartContents();
