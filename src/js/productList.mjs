@@ -7,6 +7,7 @@ function productCardtemplate(product) {
       <img
         src="${product.Image}"
         alt="${product.Name}"
+        
       />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
@@ -14,7 +15,7 @@ function productCardtemplate(product) {
     >
   </li>`
 }
-
+//fake comment
 export default async function productList(selector, category) {
     
     // get the element we will insert the list into from the selector
