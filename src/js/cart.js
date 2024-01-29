@@ -1,47 +1,69 @@
+
+// Importing the getLocalStorage function from the utils.mjs module
 import { getLocalStorage } from "./utils.mjs";
 
+// Function to render cart contents on the page
 function renderCartContents() {
+  // Get cart items from local storage
   const cartItems = getLocalStorage("so-cart");
+
+  // Map through cart items and create HTML templates for each item
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+
+  // Set the inner HTML of the product-list element with the joined HTML templates
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
 
+
+/// Function to create a template for a cart item
 function cartItemTemplate(item) {
+  // HTML template for a cart item
   const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
+    <a href="#" class="cart-card__image">
+      <img
+        src="${item.Image}"
+        alt="${item.Name}"
+      />
+    </a>
+    <a href="#">
+      <h2 class="card__name">${item.Name}</h2>
+    </a>
+    <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+    <p class="cart-card__quantity">qty: 1</p>
+    <p class="cart-card__price">$${item.FinalPrice}</p>
+  </li>`;
 
   return newItem;
 }
-
+//Get cart total
 document.addEventListener("DOMContentLoaded", function () {
   // Check if there are items in the cart
   let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
 
   if (cartItems.length > 0) {
-      // Show the cart-footer element
-      document.querySelector(".cart-footer").classList.remove("hide");
+    // If there are items, show the cart-footer element
+    document.querySelector(".cart-footer").classList.remove("hide");
 
-      // Calculate the total cost
-      let total = 0;
-      cartItems.forEach(item => {
-          total += item.price * item.quantity;
-      });
+    // Log the contents of each item in the cartItems array
+    cartItems.forEach((item, index) => {
+      console.log(`Item ${index + 1}:`, item);
+    });
 
-      // Display the total in the HTML element
-      document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
+    // Calculate the total cost of items in the cart
+    let total = 0;
+    cartItems.forEach(item => {
+      // Ensure that item has properties named 'price' and 'quantity'
+      if ("price" in item && "quantity" in item) {
+        total += item.price * item.quantity;
+      } else {
+        console.error("Item is missing 'price' or 'quantity' property:", item);
+      }
+    });
+
+    // Display the total in the HTML element with id "totalAmount"
+    document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
   }
 });
 
+// Call the renderCartContents function to initially render cart contents on page load
 renderCartContents();
