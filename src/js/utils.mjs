@@ -43,11 +43,28 @@ export function getParam(param) {
   
   return product;
 }
-
-export function renderList(templateFn, parentElement, list, position = "afterbegin", clear = true) {
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = true) {
   if (clear) {
     parentElement.innerHTML = "";
   }
   const htmlString = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlString.join(""));
+  if (callback) {
+    callback(data);
+  }
+}
+
+export function renderWithTemplate(templateFn, parentElement, data, position = "afterbegin", clear = true) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  const htmlString = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlString.join(""));
+  if (callback) {
+    callback(data);
+  }
+}
+
+function loadTemplate(path) {
+
 }

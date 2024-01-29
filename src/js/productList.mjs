@@ -1,5 +1,6 @@
 import { getData } from "./productData.mjs";
-import { renderList } from "./utils.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
+import { renderWithTemplate } from "./utils.mjs";
 function productCardtemplate(product) {
     return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
@@ -25,6 +26,6 @@ export default async function productList(selector, category) {
     console.log(products);
 
     // render out the product list to the element
-    renderList(productCardtemplate, elem, products);
+    renderListWithTemplate(productCardtemplate, elem, products);
     
 }
