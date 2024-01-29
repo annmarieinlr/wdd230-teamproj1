@@ -38,8 +38,9 @@ function cartItemTemplate(item) {
 //Get cart total
 document.addEventListener("DOMContentLoaded", function () {
   // Check if there are items in the cart
-  let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
+  
+  let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+  console.log(cartItems);
   if (cartItems.length > 0) {
     // If there are items, show the cart-footer element
     document.querySelector(".cart-footer").classList.remove("hide");
@@ -53,12 +54,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let total = 0;
     cartItems.forEach(item => {
       // Ensure that item has properties named 'price' and 'quantity'
-      if ("price" in item && "quantity" in item) {
-        total += item.price * item.quantity;
+      if ("FinalPrice" in item) { //  && "quantity" in item
+        total += item.FinalPrice;   // * item.quantity
       } else {
         console.error("Item is missing 'price' or 'quantity' property:", item);
       }
     });
+    console.log(total);
 
     // Display the total in the HTML element with id "totalAmount"
     document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
