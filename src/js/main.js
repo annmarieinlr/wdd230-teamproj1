@@ -1,5 +1,9 @@
 import { productList } from "./productList.mjs";
 
+import { loadHeaderFooter } from "./utils.mjs";
+
+loadHeaderFooter();
+
 /*
 
 // Handle form submissions
@@ -14,3 +18,4 @@ app.post('/process_signup', (req, res) => {
 });
 
 */
+
