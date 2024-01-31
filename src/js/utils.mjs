@@ -66,5 +66,21 @@ export function renderWithTemplate(templateFn, parentElement, data, position = "
 }
 
 function loadTemplate(path) {
+  return async function(){
+    const res = await fetch(path);
+        if (res.ok) {
+        const html = await res.text();
+        return html;
+    }
+  };
+}
 
+export async function loadHeaderFooter(){
+  const headerTemplateFn = loadTemplate("/partials/header.html");
+  const footerTemplateFn = loadTemplate("/partials/footer.html");
+  const headerElem = document.querySelector("#main-header");
+  const footerElem = document.querySelector("#main-footer");
+  renderWithTemplate(headerTemplateFn, headerElem);
+  renderWithTemplate(footerTemplateFn, footerElem);
+  
 }
