@@ -1,6 +1,6 @@
 import { productList } from "./productList.mjs";
 
-/*handle newsletter sign up request
+/*
 
 // Handle form submissions
 app.post('/process_signup', (req, res) => {
