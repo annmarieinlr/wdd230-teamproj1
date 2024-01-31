@@ -1,6 +1,7 @@
 import { findProductById } from "./productData.mjs";
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
+
 let product = {};
 
 export default async function productDetails(productId) {
@@ -29,10 +30,15 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", existingCart);
 }
 
-// Professor's code
-// function addToCart() {
-//     setLocalStorage("so-cart", product);
-//   }
+ 
+//function addToCart() {
+  //  setLocalStorage("so-cart", product);
+    // Importing the getLocalStorage function from the utils.mjs module
+    
+
+
+
+
 
 function renderProductDetails() {
     document.querySelector("#productName").innerText = product.Brand.Name;
