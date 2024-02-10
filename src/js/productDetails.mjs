@@ -30,11 +30,11 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", existingCart);
 }
 
- 
+
 //function addToCart() {
-  //  setLocalStorage("so-cart", product);
-    // Importing the getLocalStorage function from the utils.mjs module
-    
+//  setLocalStorage("so-cart", product);
+// Importing the getLocalStorage function from the utils.mjs module
+
 
 
 
