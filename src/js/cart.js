@@ -7,11 +7,17 @@ function renderCartContents() {
   // Get cart items from local storage
   const cartItems = getLocalStorage("so-cart");
 
-  // Map through cart items and create HTML templates for each item
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  // Check if cartItems is not null
+  if (cartItems != null) {
 
-  // Set the inner HTML of the product-list element with the joined HTML templates
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    // Map through cart items and create HTML templates for each item
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+
+    // Set the inner HTML of the product-list element with the joined HTML templates
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  } else {
+    document.querySelector(".product-list").innerHTML = "<p>Your cart is empty.</p>";
+  }
 }
 
 
@@ -38,7 +44,7 @@ function cartItemTemplate(item) {
 //Get cart total
 document.addEventListener("DOMContentLoaded", function () {
   // Check if there are items in the cart
-  
+
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
   console.log(cartItems);
   if (cartItems.length > 0) {
