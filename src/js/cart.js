@@ -1,4 +1,3 @@
-
 // Importing the getLocalStorage function from the utils.mjs module
 import { getLocalStorage } from "./utils.mjs";
 
@@ -19,7 +18,6 @@ function renderCartContents() {
     document.querySelector(".product-list").innerHTML = "<p>Your cart is empty.</p>";
   }
 }
-
 
 /// Function to create a template for a cart item
 function cartItemTemplate(item) {
@@ -58,10 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Calculate the total cost of items in the cart
     let total = 0;
-    cartItems.forEach(item => {
+    cartItems.forEach((item) => {
       // Ensure that item has properties named 'price' and 'quantity'
-      if ("FinalPrice" in item) { //  && "quantity" in item
-        total += item.FinalPrice;   // * item.quantity
+      if ("FinalPrice" in item) {
+        //  && "quantity" in item
+        total += item.FinalPrice; // * item.quantity
       } else {
         console.error("Item is missing 'price' or 'quantity' property:", item);
       }
