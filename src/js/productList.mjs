@@ -1,6 +1,6 @@
 import { getData } from "./productData.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
-import { renderWithTemplate } from "./utils.mjs";
+// import { renderWithTemplate } from "./utils.mjs";
 
 function productCardtemplate(product) {
   // Calculate discounted price
@@ -34,5 +34,6 @@ export default async function productList(selector, category) {
 
   // render out the product list to the element
   renderListWithTemplate(productCardtemplate, elem, products);
+  document.querySelector(".title").innerHTML = category;
 
 }
