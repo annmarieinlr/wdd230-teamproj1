@@ -7,7 +7,7 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 //export function getLocalStorage(key) {
-  //return JSON.parse(localStorage.getItem(key));
+//return JSON.parse(localStorage.getItem(key));
 //}
 
 // Function to get data from local storage
@@ -17,7 +17,7 @@ export function getLocalStorage(key) {
 }
 // save data to local storage
 //export function setLocalStorage(key, data) {
-  //localStorage.setItem(key, JSON.stringify(data));
+//localStorage.setItem(key, JSON.stringify(data));
 //}
 
 // Function to set data in local storage
@@ -40,47 +40,44 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get("product");
-  
+
   return product;
 }
+
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = true) {
   if (clear) {
     parentElement.innerHTML = "";
   }
   const htmlString = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlString.join(""));
-  if (callback) {
-    callback(data);
-  }
 }
 
-export function renderWithTemplate(templateFn, parentElement, data, position = "afterbegin", clear = true) {
+export async function renderWithTemplate(templateFn, parentElement, data, callback, position = "afterbegin", clear = true) {
   if (clear) {
     parentElement.innerHTML = "";
   }
-  const htmlString = list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlString.join(""));
+  const htmlString = await templateFn(data);
+  parentElement.insertAdjacentHTML(position, htmlString);
   if (callback) {
     callback(data);
   }
 }
 
 function loadTemplate(path) {
-  return async function(){
+  return async function () {
     const res = await fetch(path);
-        if (res.ok) {
-        const html = await res.text();
-        return html;
+    if (res.ok) {
+      const html = await res.text();
+      return html;
     }
   };
 }
 
-export async function loadHeaderFooter(){
+export async function loadHeaderFooter() {
   const headerTemplateFn = loadTemplate("/partials/header.html");
   const footerTemplateFn = loadTemplate("/partials/footer.html");
   const headerElem = document.querySelector("#main-header");
   const footerElem = document.querySelector("#main-footer");
   renderWithTemplate(headerTemplateFn, headerElem);
   renderWithTemplate(footerTemplateFn, footerElem);
-  
 }
