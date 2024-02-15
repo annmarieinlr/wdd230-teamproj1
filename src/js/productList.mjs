@@ -10,7 +10,7 @@ function productCardtemplate(product) {
   const discountPrice = (1 - discountPercentage) * originalPrice;
 
   return `<li class="product-card">
-    <a href="product_pages/index.html?product=${product.Id}">
+    <a href="/product_pages/index.html?product=${product.Id}">
     <img
       src="${product.Images.PrimaryMedium}"
       alt="Image of ${product.Name}"
@@ -32,7 +32,7 @@ export default async function productList(selector, category) {
   const products = await getData(category);
 
   //check this
-  console.log(products);
+  // console.log(products);
 
   // render out the product list to the element
   renderListWithTemplate(productCardtemplate, elem, products);
