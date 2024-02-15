@@ -27,10 +27,10 @@ export default async function productList(selector, category) {
 
   // get the element we will insert the list into from the selector
   const elem = document.querySelector(selector);
-  console.log(`selector: ${selector}`);
+
   // get the list of products 
   const products = await getData(category);
-  console.log(`category: ${category}`);
+
   //check this
   console.log(products);
 
