@@ -7,9 +7,9 @@ let product = {};
 export default async function productDetails(productId) {
     // get the details for the current product. findProductById will return a promise! use await or .then() to process it
     product = await findProductById(productId);
-    console.log(`Id-URL: ${productId}`);
     // once we have the product details we can render out the HTML
     renderProductDetails();
+    console.log(`Id-URL: ${productId}`);
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Adding '() =>' will make sure that 'addProductToCart' won't be executed right away 
     document.getElementById("addToCart").addEventListener("click", () => addProductToCart(product));
