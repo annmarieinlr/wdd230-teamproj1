@@ -39,9 +39,10 @@ export function setClick(selector, callback) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get("product");
+  // const product = urlParams.get("product");
+  console.log(`productURL: ${urlParams.get(param)}`);
 
-  return product;
+  return urlParams.get(param);
 }
 
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = true) {

@@ -9,10 +9,11 @@ function productCardtemplate(product) {
   const discountAmount = originalPrice * discountPercentage;
   const discountPrice = (1 - discountPercentage) * originalPrice;
   console.log(discountPrice);
+
   return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
     <img
-      src="${product.Image}"
+      src="${product.Images.PrimaryMedium}"
       alt="Image of ${product.Name}"
     />
     <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -26,9 +27,10 @@ export default async function productList(selector, category) {
 
   // get the element we will insert the list into from the selector
   const elem = document.querySelector(selector);
-
+  console.log(`selector: ${selector}`);
   // get the list of products 
   const products = await getData(category);
+  console.log(`category: ${category}`);
   //check this
   console.log(products);
 
