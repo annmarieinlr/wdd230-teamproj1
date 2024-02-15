@@ -8,7 +8,6 @@ function productCardtemplate(product) {
   const discountPercentage = .2;
   const discountAmount = originalPrice * discountPercentage;
   const discountPrice = (1 - discountPercentage) * originalPrice;
-  console.log(discountPrice);
 
   return `<li class="product-card">
     <a href="product_pages/index.html?product=${product.Id}">
@@ -37,6 +36,6 @@ export default async function productList(selector, category) {
 
   // render out the product list to the element
   renderListWithTemplate(productCardtemplate, elem, products);
-  document.querySelector(".title").innerHTML = category;
+  document.querySelector(".title").innerHTML = category.toUpperCase();
 
 }
