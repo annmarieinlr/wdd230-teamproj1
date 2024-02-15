@@ -18,7 +18,8 @@ function productCardtemplate(product) {
     />
     <h3 class="card__brand">${product.Brand.Name}</h3>
     <h2 class="card__name">${product.NameWithoutBrand}</h2>
-    <p class="product-card__price">$${discountPrice.toFixed(2)}</p>
+    <p class="product-card__price">Original Price: $${product.FinalPrice}</p></a>
+    <p class="product-card__price">Current Price: $${discountPrice.toFixed(2)}</p>
     <p class="product-card__discount">Save $${discountAmount.toFixed(2)} (${Math.round(20)}% off)</p>
   </li>`;
 }
