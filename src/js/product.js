@@ -3,10 +3,7 @@ import { getLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 import { getParam } from "./utils.mjs";
 import productDetails from "./productDetails.mjs";
-<<<<<<< HEAD
-import { loadHeaderFooter } from "./utils.mjs";
-=======
->>>>>>> 5eaa90950e4ed8adb3f98bd8d7b2dd7da2ecf8a9
+// import { loadHeaderFooter } from "./utils.mjs";
 
 // add to cart button event handler
 
