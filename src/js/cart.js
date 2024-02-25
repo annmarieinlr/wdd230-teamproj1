@@ -23,7 +23,7 @@ function renderCartContents() {
 function cartItemTemplate(item) {
   // HTML template for a cart item
   const newItem = `<li class="cart-card divider">
-  <button class="remove-item" data-id="${item.id}">X</button>
+  <button class="remove-item" data-id="${item.itemId}">X</button>
     <a href="#" class="cart-card__image">
       <img
         src="${item.Image}"
@@ -74,11 +74,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Remove item from cart
-function removeFromCart(itemId) {
+function removeFromCart(item) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
 
   // Remove the item with the given id
-  cartItems = cartItems.filter(item => item.id !== itemId);
+  // eslint-disable-next-line no-shadow
+  cartItems = cartItems.filter(item => item.itemId !== item.itemId);
 
   // Update localStorage
   localStorage.setItem("so-cart", JSON.stringify(cartItems));
