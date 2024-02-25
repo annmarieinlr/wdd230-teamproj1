@@ -23,7 +23,7 @@ function renderCartContents() {
 function cartItemTemplate(item) {
   // HTML template for a cart item
   const newItem = `<li class="cart-card divider">
-  <button class="remove-item" data-id="${item.Name}">X</button>
+  <button class="remove-item" data-id="${item.id}">X</button>
     <a href="#" class="cart-card__image">
       <img
         src="${item.Image}"
@@ -70,6 +70,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Display the total in the HTML element with id "totalAmount"
     document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
+  }
+});
+
+// Remove item from cart
+function removeFromCart(itemId) {
+  let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+
+  // Remove the item with the given id
+  cartItems = cartItems.filter(item => item.id !== itemId);
+
+  // Update localStorage
+  localStorage.setItem("so-cart", JSON.stringify(cartItems));
+
+  // Re-render cart contents
+  renderCartContents();
+}
+
+// Event delegation to handle remove item button clicks
+document.querySelector(".product-list").addEventListener("click", function(event) {
+  if (event.target.classList.contains("remove-item")) {
+    const itemId = event.target.getAttribute("data-id");
+    removeFromCart(itemId);
   }
 });
 
