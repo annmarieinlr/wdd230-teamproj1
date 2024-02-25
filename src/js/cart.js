@@ -23,6 +23,7 @@ function renderCartContents() {
 function cartItemTemplate(item) {
   // HTML template for a cart item
   const newItem = `<li class="cart-card divider">
+  <button class="remove-item" data-id="${item.Name}">X</button>
     <a href="#" class="cart-card__image">
       <img
         src="${item.Image}"
