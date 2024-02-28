@@ -19,6 +19,7 @@ function addToCart() {
   }
   // then add the current product to the list
   cartContents.push(product);
+  alert("Added to Cart");
   setLocalStorage("so-cart", cartContents);
 }
 function renderProductDetails() {
