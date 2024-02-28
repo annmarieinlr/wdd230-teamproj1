@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, alertMessage, RemoveAllAleters } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
 
