@@ -1,6 +1,8 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, alertMessage, removeAllAlerts } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
+
+//Converts form data to a json object
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
     convertedJSON = {};
@@ -49,7 +51,7 @@ const checkoutProcess = {
     itemNumElement.innerText = this.list.length;
     // calculate the total of all the items in the cart
     const amounts = this.list.map((item) => item.FinalPrice);
-    this.itemTotal = amounts.reduce((sum, item) => sum + item);
+    this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
     summaryElement.innerText = "$" + this.itemTotal;
   },
   calculateOrdertotal: function () {
@@ -65,9 +67,7 @@ const checkoutProcess = {
   displayOrderTotals: function () {
     const shipping = document.querySelector(this.outputSelector + " #shipping");
     const tax = document.querySelector(this.outputSelector + " #tax");
-    const orderTotal = document.querySelector(
-      this.outputSelector + " #orderTotal"
-    );
+    const orderTotal = document.querySelector(this.outputSelector + " #orderTotal");
     shipping.innerText = "$" + this.shipping;
     tax.innerText = "$" + this.tax;
     orderTotal.innerText = "$" + this.orderTotal;
@@ -84,7 +84,15 @@ const checkoutProcess = {
     try {
       const res = await checkout(json);
       console.log(res);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
+
       console.log(err);
     }
   },

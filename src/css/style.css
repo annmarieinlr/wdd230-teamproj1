@@ -136,6 +136,20 @@ button {
 
 /* End cart icon styles */
 
+/* alert styles */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert > p {
+  margin: 0;
+}
+
+
 /* product grid styles */
 .product-grid {
   list-style-type: none;
