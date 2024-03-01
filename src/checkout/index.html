@@ -13,11 +13,12 @@
 
     <!-- Link to the external stylesheet for styling -->
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
   </head>
 
   <body>
     <!-- Header section with a logo and shopping cart link -->
-    <header class="divider">
+    <header class="divider" id ="main-header">
       <div class="logo">
         <!-- Logo image with a link to the home page -->
         <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
@@ -43,18 +44,23 @@
     </header>
 
     <!-- Main content section -->
-    <main class="divider">
+    <main class="divider" >
       <section class="products">
         <!-- Section heading for the review and order placement -->
         <h2>Review & Place your Order</h2>
       </section>
       <section>
         <div>
-          <form>
+          <form name="checkout">
             <h2>Customer Information</h2>
-    <form action="/submit" method="POST">
-        <label for="customerName">Customer Name:</label><br>
-        <input type="text" id="customerName" name="customerName" required><br><br>
+    <fieldset action="/submit" method="POST" >
+        <!-- <label for="customerName">Customer Name:</label><br>
+        <input type="text" id="customerName" name="customerName" required><br><br> -->
+
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" required><br><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" required><br><br>
 
         <label for="street">Street Address:</label><br>
         <input type="text" id="street" name="street" required></input><br><br>
@@ -67,35 +73,40 @@
 
         <label for="zip">Zipcode:</label><br>
         <input type="number" id="zip" name="zip" required></input><br><br>
-      </form>
+        </fieldset>
 
-      <form>
+      <fieldset>
         <h2>Payment Information</h2>
-        <label for="creditCardNumber">Credit Card Number:</label><br>
-        <input type="number" id="creditCardNumber" name="creditCardNumber" required><br><br>
+        <label for="cardNumber">Credit Card Number:</label><br>
+        <input type="number" id="cardNumber" name="cardNumber" required><br><br>
 
-        <label for="expirationDate">Expiration Date:</label><br>
-        <input type="number" id="expirationDate" name="expirationDate" placeholder="MM/YYYY" required><br><br>
+        <label for="expiration">Expiration Date:</label><br>
+        <input type="string" id="expiration" name="expiration" placeholder="MM/YYYY" required><br><br>
 
-        <label for="securityCode">Security Code:</label><br>
-        <input type="number" id="securityCode" name="securityCode" required><br><br>
+        <label for="code">Security Code:</label><br>
+        <input type="number" id="code" name="code" required><br><br>
 
-        <input type="submit" value="Submit">
+        <!-- <input type="submit" value="Submit"> -->
+      </fieldset>
     </form>
           
-    <form>
+    <form class="checkout-summary">
       <h2>Order Summary</h2>
-      <label for="subtotal">Item Subtotal</label><br>
-      <input type="subtotal" id="subtotal" name="subtotal"><br><br>
+      <label for="subtotal">Item Subtotal <span id="num-items"></span></label><br>
+      <!-- <input type="subtotal" id="cartTotal" name="subtotal"><br><br> -->
+      <p type="subtotal" id="cartTotal" name="subtotal"></p>
 
       <label for="shipping">Shipping Estimate</label><br>
-      <input type="number" id="shipping" name="shipping"><br><br>
+      <!-- <input type="number" id="shipping" name="shipping"><br><br> -->
+      <p type="number" id="shipping" name="shipping"></p>
 
       <label for="tax">Tax</label><br>
-      <input type="number" id="tax" name="tax"><br><br>
+      <!-- <input type="number" id="tax" name="tax"><br><br> -->
+      <p type="number" id="tax" name="tax"></p>
 
       <label for="total">Order Total</label><br>
-      <input type="number" id="total" name="total"><br><br>
+      <!-- <input type="number" id="orderTotal" name="total"><br><br> -->
+      <p type="number" id="orderTotal" name="total"></p>
 
       <button id="checkoutSubmit" type="submit">Checkout</button>
 
@@ -105,6 +116,6 @@
     </main>
 
     <!-- Footer section with a copyright notice -->
-    <footer>&copy;NOT really a real business</footer>
+    <footer id="main-footer">&copy;NOT really a real business</footer>
   </body>
 </html>
