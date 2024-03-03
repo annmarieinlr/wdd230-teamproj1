@@ -5,7 +5,7 @@ import { getLocalStorage } from "./utils.mjs";
 function renderCartContents() {
   // Get cart items from local storage
   const cartItems = getLocalStorage("so-cart");
-  //console.log(cartItems);
+  
   // Check if cartItems is not null
   if (cartItems != null) {
 
@@ -14,6 +14,16 @@ function renderCartContents() {
 
     // Set the inner HTML of the product-list element with the joined HTML templates
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+    // Add event listeners to quantity input fields
+    const quantityInputs = document.querySelectorAll(".cart-card__quantity-input");
+    quantityInputs.forEach(input => {
+      input.addEventListener("change", function(event) {
+        const itemId = event.target.getAttribute("data-id");
+        const newQuantity = parseInt(event.target.value);
+        updateCartItemQuantity(itemId, newQuantity);
+      });
+    });
   } else {
     document.querySelector(".product-list").innerHTML = "<p>Your cart is empty.</p>";
   }
@@ -46,18 +56,35 @@ function cartItemTemplate(item) {
       <h2 class="card__name">${item.Name}</h2>
     </a>
     <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-    <p class="cart-card__quantity">qty: 1</p>
+    <p>Quantity: <input type="number" class="cart-card__quantity-input" data-id="${item.Id}" value="${item.quantity}" min="1"></p>
     <p class="cart-card__price">$${item.FinalPrice}</p>
   </li>`;
 
   return newItem;
+}
+
+// Function to update quantity of a cart item
+function updateCartItemQuantity(itemId, newQuantity) {
+  let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
+
+  // Update the quantity of the item with the given id
+  cartItems.forEach(item => {
+    if (item.Id === itemId) {
+      item.quantity = newQuantity;
+    }
+  });
+
+  // Update localStorage
+  localStorage.setItem("so-cart", JSON.stringify(cartItems));
+
+  // Re-render cart contents
+  renderCartContents();
 }
 //Get cart total
 document.addEventListener("DOMContentLoaded", function () {
   // Check if there are items in the cart
 
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
-  //console.log(cartItems);
   if (cartItems.length > 0) {
     // If there are items, show the cart-footer element
     document.querySelector(".cart-footer").classList.remove("hide");
@@ -72,13 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
     cartItems.forEach((item) => {
       // Ensure that item has properties named 'price' and 'quantity'
       if ("FinalPrice" in item) {
-        //  && "quantity" in item
-        total += item.FinalPrice; // * item.quantity
+         total += item.FinalPrice * item.quantity;
       } else {
         console.error("Item is missing 'price' or 'quantity' property:", item);
       }
     });
-    console.log(total);
+    //console.log(total);
 
     // Display the total in the HTML element with id "totalAmount"
     document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
@@ -108,7 +134,7 @@ function removeFromCart(itemIdToRemove) {
     // Ensure that item has properties named 'price' and 'quantity'
     if ("FinalPrice" in item) {
       //  && "quantity" in item
-      total += item.FinalPrice; // * item.quantity
+      total += item.FinalPrice * item.quantity;
     } else {
       console.error("Item is missing 'price' or 'quantity' property:", item);
     }
