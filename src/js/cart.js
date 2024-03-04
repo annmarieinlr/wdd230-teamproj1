@@ -8,27 +8,26 @@ function renderCartContents() {
   //console.log(cartItems);
   // Check if cartItems is not null
   if (cartItems != null) {
-
     // Map through cart items and create HTML templates for each item
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
 
     // Set the inner HTML of the product-list element with the joined HTML templates
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
   } else {
-    document.querySelector(".product-list").innerHTML = "<p>Your cart is empty.</p>";
+    document.querySelector(".product-list").innerHTML =
+      "<p>Your cart is empty.</p>";
   }
   const btns = document.querySelectorAll(".remove-item");
   // console.log(btns);
-  btns.forEach(item=>{
+  btns.forEach((item) => {
     // console.log(item)
-    item.addEventListener("click", function(event) {
+    item.addEventListener("click", function (event) {
       if (event.target.classList.contains("remove-item")) {
         const itemId = event.target.getAttribute("data-id");
         removeFromCart(itemId);
       }
-    }
-)
-  })
+    });
+  });
 }
 
 /// Function to create a template for a cart item
@@ -90,7 +89,7 @@ function removeFromCart(itemIdToRemove) {
   let cartItems = JSON.parse(localStorage.getItem("so-cart")) || [];
 
   // Remove the item with the given id
-  cartItems = cartItems.filter(item => item.Id !== itemIdToRemove);
+  cartItems = cartItems.filter((item) => item.Id !== itemIdToRemove);
 
   // Update localStorage
   localStorage.setItem("so-cart", JSON.stringify(cartItems));
@@ -117,12 +116,7 @@ function removeFromCart(itemIdToRemove) {
 
   // Display the total in the HTML element with id "totalAmount"
   document.getElementById("totalAmount").innerText = `$${total.toFixed(2)}`;
-
 }
-
-
-
-
 
 // Call the renderCartContents function to initially render cart contents on page load
 renderCartContents();

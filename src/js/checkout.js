@@ -12,7 +12,6 @@ document
     checkoutProcess.calculateOrdertotal.bind(checkoutProcess)
   );
 
-
 // this is how it would look if we listen for the submit on the form
 document.forms["checkout"].addEventListener("submit", (e) => {
   e.preventDefault();
