@@ -1,6 +1,7 @@
 import { loginRequest } from "./externalServices.mjs";
 import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const tokenKey = "so-token";
 
@@ -8,13 +9,14 @@ export async function login(creds, redirect = "/") {
     try {
         const token = await loginRequest(creds);
         setLocalStorage(tokenKey, token);
-        window.location = redirect;
+         window.location = redirect;
+        //window.location = "../orders";
     } catch (err) {
         alertMessage(err.message.message);
     }
 }
 
-export function checkLogIn() {
+export function checkLogin() {
     const token = getLocalStorage(tokenKey);
     const valid = isTokenValid(token);
 
@@ -29,7 +31,7 @@ export function checkLogIn() {
 function isTokenValid(token) {
     if (token) {
         // decode the token
-        const decoded = jwt_decode(token);
+        const decoded = jwtDecode(token);
         // get the current date
         let currentDate = new Date();
         // JWT exp is in seconds, the time from our current date will be milliseconds.
